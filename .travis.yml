@@ -4,7 +4,7 @@ language: node_js
 env:
   global:
   - NODE_ENV='test'
-  - DOCKER_USER='kiosukez+kiosukez_robot'
+  - DOCKER_USERNAME='kiosukez+kiosukez_robot'
   - DOCKER_PASSWORD='CLM8EKTHOCMCZTP3C4GNCI28OHLTWLI6H4XYILR5P5XLJPA4WEF9B4HO9EMW5EZO'
 
 before_install:
