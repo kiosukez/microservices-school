@@ -1,35 +1,35 @@
 sudo: false
-
 cache: yarn
-
 language: node_js
-
 env:
   global:
   - NODE_ENV='test'
+  - DOCKER_USER='kiosukez+kiosukez_robot'
+  - DOCKER_PASSWORD='CLM8EKTHOCMCZTP3C4GNCI28OHLTWLI6H4XYILR5P5XLJPA4WEF9B4HO9EMW5EZO'
 
 before_install:
-  - cd ./$SERVICE
-  - nvm install
-  - nvm use
-  - node --version
+- cd ./$SERVICE
+- nvm install
+- nvm use
+- node --version
 
 before_script:
-  - SERVICE=$SERVICE make ensure-dependencies
-  - sleep 10
+- SERVICE=$SERVICE make ensure-dependencies
+- sleep 10
 
 script:
-  - make qa
-  - TRAVIS_BUILD_ID=$TRAVIS_BUILD_ID TRAVIS_BUILD_NUMBER=$TRAVIS_BUILD_NUMBER make brand
+- make qa
+- TRAVIS_BUILD_ID=$TRAVIS_BUILD_ID TRAVIS_BUILD_NUMBER=$TRAVIS_BUILD_NUMBER make brand
+- DOCKER_USERNAME=$DOCKER_USERNAME DOCKER_PASSWORD=$DOCKER_PASSWORD make build
 
 matrix:
   include:
-    - env: SERVICE=recipes-api
-      services:
-        - docker
-    - env: SERVICE=recipes-crawler
-      services:
-        - docker
-    - env: SERVICE=recipes-id-generator
-      services:
-        - docker
+  - env: SERVICE=recipes-api
+    services:
+    - docker
+  - env: SERVICE=recipes-crawler
+    services:
+    - docker
+  - env: SERVICE=recipes-id-generator
+    services:
+    - docker
